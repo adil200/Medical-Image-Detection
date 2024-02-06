@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}">
+    <title>Medical MNIST Image Classifier</title>
+</head>
+<body>
+    <div class="container">
+        <h1 class="title">Medical MNIST Image Classifier</h1>
+        <form action="/" method="post" enctype="multipart/form-data">
+            <label for="file" class="file-label">
+                <span id="file-name">Choose a file</span>
+                <input type="file" name="file" id="file" accept=".png, .jpg, .jpeg" required onchange="updateFileName(this)">
+            </label>
+            <button type="submit" class="predict-btn">Predict</button>
+        </form>
+        {% if prediction %}
+            <div class="result">
+                <h2>Prediction:</h2>
+                <p>{{ prediction }}</p>
+            </div>
+        {% endif %}
+    </div>
+
+    <script>
+        function updateFileName(input) {
+            document.getElementById('file-name').innerText = input.files[0].name;
+        }
+    </script>
+</body>
+</html>
